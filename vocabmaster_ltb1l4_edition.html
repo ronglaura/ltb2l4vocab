@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VocabMaster - LTB1L4 Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .fade-in-up { animation: fadeInUp 0.5s ease-out forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); scale: 1; } 50% { scale: 1.2; } 100% { opacity: 0; transform: translateY(-40px); scale: 1; } }
+        .animate-float-up { animation: floatUp 1.2s ease-out forwards; }
+        @keyframes popIn { 0% { transform: scale(0); opacity: 0; } 80% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .animate-pop-in { animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popOut { 0% { transform: scale(1); opacity: 1; } 40% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(0); opacity: 0; } }
+        .animate-pop-out { animation: popOut 0.3s ease-in forwards; }
+        .transition-width { transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .text-gradient { background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-purple-50 via-blue-50 to-cyan-50 text-slate-800 min-h-screen flex flex-col selection:bg-fuchsia-200 pb-32">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-200 sticky top-0 z-50">
+        <div class="max-w-3xl mx-auto p-4 pb-2">
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-white/20 p-2 rounded-xl backdrop-blur-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-extrabold tracking-tight">Vocab<span class="text-yellow-300">Master</span></h1>
+                        <p class="text-[10px] text-violet-200 font-medium tracking-wide" id="unit-tag">LT B1 L4</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2">
+                    <button onclick="openSettings()" class="bg-white/20 p-2 rounded-xl backdrop-blur-sm hover:bg-white/30 transition-colors" title="課次設定與匯出">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    </button>
+                    <button onclick="openReport()" class="bg-white/20 p-2 rounded-xl backdrop-blur-sm hover:bg-white/30 transition-colors" title="學習報表">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                    </button>
+                    <div class="text-right pl-1">
+                        <div class="text-[9px] text-violet-100 font-bold uppercase tracking-widest">Level <span id="level-display">1</span></div>
+                        <div class="text-xs font-black text-white"><span id="xp-display">0</span> XP</div>
+                    </div>
+                    <div class="w-9 h-9 rounded-full bg-yellow-400 border-2 border-violet-700/30 flex items-center justify-center font-black text-violet-900 text-sm shadow-md">
+                        <span id="level-badge">1</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- XP progress bar -->
+            <div class="relative h-2.5 bg-black/20 rounded-full overflow-hidden mb-3 shadow-inner">
+                <div id="xp-bar" class="absolute top-0 left-0 h-full bg-gradient-to-r from-lime-400 to-green-400 transition-width shadow-[0_0_10px_rgba(132,204,22,0.6)]" style="width: 0%;"></div>
+            </div>
+
+            <!-- Main Mode Tabs -->
+            <div class="flex bg-black/20 p-1 rounded-xl backdrop-blur-sm">
+                <button onclick="switchTab('practice')" id="tab-practice" class="flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all bg-white text-violet-700 shadow-sm flex items-center justify-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                    <span>Learn</span>
+                </button>
+                <button onclick="switchTab('game')" id="tab-game" class="flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all text-violet-100 hover:bg-white/10 flex items-center justify-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    <span>Game</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-2xl w-full mx-auto p-4 md:p-6 space-y-6 relative">
+        <div id="protocol-warning" class="hidden bg-orange-100 border-2 border-orange-300 p-4 rounded-2xl flex items-start shadow-sm mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-orange-500 w-6 h-6 mr-3 mt-0.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <div>
+                <p class="text-orange-800 font-bold text-sm mb-1">Microphone might not work</p>
+                <p class="text-orange-700 text-xs">Please open this page via HTTPS (e.g. deployed link) for microphone speech recognition access.</p>
+            </div>
+        </div>
+
+        <div id="error-banner" class="hidden bg-rose-50 border-2 border-rose-300 p-4 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between shadow-md z-50 sticky top-2 mb-4 gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-rose-100 rounded-xl text-rose-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div>
+                    <p id="error-text" class="text-rose-800 font-bold text-sm">Microphone blocked.</p>
+                    <p class="text-rose-600 text-xs">請點擊網址列左側圖示允許麥克風權限，或使用手動拼寫輸入。</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+                <button onclick="requestMicPermission()" class="px-3 py-1.5 bg-rose-600 text-white text-xs font-bold rounded-xl hover:bg-rose-700 shadow-sm transition-all whitespace-nowrap">重新授權</button>
+                <button onclick="promptManualInput()" class="px-3 py-1.5 bg-white border border-rose-200 text-rose-700 text-xs font-bold rounded-xl hover:bg-rose-100 shadow-sm transition-all whitespace-nowrap">手動輸入</button>
+                <button onclick="hideError()" class="p-1.5 text-slate-400 hover:text-slate-600">✕</button>
+            </div>
+        </div>
+
+        <div id="xp-float-container" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none w-full flex justify-center"></div>
+
+        <!-- PRACTICE VIEW -->
+        <div id="view-practice" class="fade-in-up">
+            <div class="flex justify-between text-xs font-semibold text-violet-400 px-2 mb-2 uppercase tracking-wider">
+                <div id="stats-counts">Mastered: <span id="word-count">0/26</span>W | <span id="sentence-count">0</span>S</div>
+                <div id="progress-indicator">Card 1 / 50</div>
+            </div>
+
+            <div class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl shadow-indigo-100/50 overflow-hidden border border-white relative">
+                <div id="completed-badge" class="hidden absolute top-0 right-0 m-4 bg-gradient-to-r from-emerald-400 to-teal-400 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider flex items-center shadow-lg transform rotate-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Mastered
+                </div>
+
+                <div id="card-content" class="transition-opacity duration-300">
+                    <div class="p-8 pb-4 text-center">
+                        <span id="word-pos" class="inline-block px-4 py-1.5 mb-4 text-xs font-extrabold tracking-wider text-fuchsia-600 uppercase bg-fuchsia-100 rounded-full border border-fuchsia-200">Adjective</span>
+                        <h2 id="word-headword" class="text-3xl md:text-4xl font-black mb-3 tracking-tight break-words text-gradient bg-gradient-to-br from-violet-600 via-fuchsia-600 to-pink-500 drop-shadow-sm">sensitive</h2>
+                        <p id="word-definition" class="text-slate-500 text-sm md:text-base font-medium leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-100">"Able to notice very subtle things such as changes or differences that others may not be aware of."</p>
+                    </div>
+
+                    <div class="flex justify-center my-2 px-6">
+                        <div class="bg-slate-100 p-1.5 rounded-2xl flex space-x-1 w-full max-w-sm shadow-inner">
+                            <button id="btn-mode-word" onclick="setMode('word')" class="flex-1 py-3 rounded-xl text-sm font-bold transition-all shadow-md bg-white text-fuchsia-600 ring-2 ring-fuchsia-100 scale-105">Word</button>
+                            <button id="btn-mode-sentence" onclick="setMode('sentence')" class="flex-1 py-3 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-slate-600">Sentence</button>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-6 flex flex-col items-center">
+                        <p id="target-label" class="text-violet-400 text-[10px] font-black uppercase mb-3 tracking-[0.2em]">Target Word</p>
+                        <p id="target-text" class="text-lg md:text-xl text-center font-bold text-slate-700 leading-relaxed bg-white border-2 border-indigo-50 p-4 rounded-2xl shadow-sm w-full">sensitive</p>
+                        <div class="flex items-center gap-2 mt-4">
+                            <button onclick="speakTarget()" class="group flex items-center space-x-2 text-violet-600 bg-violet-50 hover:bg-violet-100 px-5 py-2.5 rounded-full transition-all font-bold border border-violet-100 cursor-pointer">
+                                <div class="bg-white p-1.5 rounded-full shadow-sm group-hover:scale-110 transition-transform">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                                </div>
+                                <span>Listen First</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="feedback-container" class="hidden px-6 pb-6">
+                        <div class="bg-white rounded-2xl border-2 border-indigo-50 shadow-lg p-4 flex items-center justify-between">
+        <div id="error-banner" class="hidden bg-rose-50 border-2 border-rose-300 p-4 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between shadow-md z-50 sticky top-2 mb-4 gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-rose-100 rounded-xl text-rose-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div>
+                    <p id="error-text" class="text-rose-800 font-bold text-sm">Microphone blocked.</p>
+                    <p class="text-rose-600 text-xs">請點擊網址列左側圖示允許麥克風權限。</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2 w-full md:w-auto justify-end">
+                <button onclick="requestMicPermission()" class="px-3 py-1.5 bg-rose-600 text-white text-xs font-bold rounded-xl hover:bg-rose-700 shadow-sm transition-all whitespace-nowrap">重新授權</button>
+                <button onclick="hideError()" class="p-1.5 text-slate-400 hover:text-slate-600">✕</button>
+            </div>
+        </div>
+
+        <!-- GAME VIEW (Speed Grid) -->
+        <div id="view-game" class="hidden fade-in-up h-full">
+            <div id="game-intro" class="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-white p-8 text-center flex flex-col items-center justify-center min-h-[400px]">
+                <div class="w-24 h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mb-6 shadow-lg animate-bounce">
+                    <span class="text-5xl">⚡</span>
+                </div>
+                <h2 class="text-3xl font-black text-slate-800 mb-2">Speed Grid</h2>
+                <p class="text-slate-500 mb-8 max-w-xs mx-auto">You have <b>60 seconds</b>. Shout any word on the screen to blast it!</p>
+                <div class="grid grid-cols-2 gap-4 w-full max-w-xs mb-8">
+                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                        <div class="text-2xl font-black text-violet-600">+5 XP</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Per Word</div>
+                    </div>
+                    <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                        <div class="text-2xl font-black text-fuchsia-600">Bonus</div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">10+ Words</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-board" class="hidden flex-col h-full">
+                <div class="flex justify-between items-center mb-4 px-2">
+                    <div class="bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                        <span class="text-xs font-bold text-slate-400 uppercase mr-1">Time</span>
+                        <span id="game-timer" class="text-xl font-black text-rose-500 font-mono">60</span>
+                    </div>
+                    <div class="flex space-x-1 items-end h-5">
+                        <div class="w-1 bg-rose-400 rounded-full animate-[bounce_1s_infinite] h-2"></div>
+                        <div class="w-1 bg-rose-500 rounded-full animate-[bounce_1.2s_infinite] h-4"></div>
+                        <div class="w-1 bg-rose-400 rounded-full animate-[bounce_0.8s_infinite] h-2"></div>
+                    </div>
+                    <div class="bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                        <span class="text-xs font-bold text-slate-400 uppercase mr-1">Score</span>
+                        <span id="game-score" class="text-xl font-black text-indigo-600 font-mono">0</span>
+                    </div>
+                </div>
+                <div id="game-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3 w-full pb-4"></div>
+            </div>
+
+            <div id="game-over" class="hidden bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl border border-white p-8 text-center flex flex-col items-center justify-center min-h-[400px]">
+                <h2 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-fuchsia-600 mb-2">Time's Up!</h2>
+                <p class="text-slate-500 font-bold mb-6">Final Score</p>
+                <div class="text-8xl font-black text-slate-800 mb-2" id="final-score">0</div>
+                <div class="text-green-500 font-bold text-xl mb-8" id="xp-earned">+0 XP</div>
+                <button onclick="startGame()" class="w-full bg-slate-800 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:scale-105 transition-transform">Play Again</button>
+            </div>
+        </div>
+
+        <!-- SETTINGS MODAL -->
+        <div id="settings-modal" class="hidden fixed inset-0 z-[80] flex items-center justify-center bg-violet-900/60 backdrop-blur-md p-4">
+            <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg p-6 flex flex-col animate-fade-in-up">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="text-xl font-black text-slate-800">⚙️ 課次切換與匯出發布</h3>
+                    <button onclick="closeSettings()" class="text-slate-400 hover:text-slate-600 font-bold text-lg">✕</button>
+                </div>
+                <div class="mb-3">
+                    <label class="text-[11px] font-bold uppercase text-slate-400">課次名稱（Unit Name）</label>
+                    <input type="text" id="unit-name-input" class="w-full p-2 text-sm border rounded-xl border-slate-200 mt-1 outline-none focus:border-violet-500 font-bold" placeholder="例如：LT B1 L4">
+                </div>
+                <label class="text-[11px] font-bold uppercase text-slate-400 mb-1">單字資料（支援 Excel/Sheets 直接複製貼上）</label>
+                <textarea id="custom-vocab-input" class="w-full h-40 p-3 text-xs border rounded-2xl border-slate-200 outline-none focus:border-violet-500 font-mono" placeholder="單字 [Tab] 詞性 [Tab] 釋義 [Tab] 例句"></textarea>
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-2 mt-4">
+                    <button onclick="resetDefaultVocab()" class="text-xs text-rose-500 font-bold hover:underline">恢復預設</button>
+                    <div class="flex space-x-2 w-full sm:w-auto">
+                        <button onclick="saveCustomVocab()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200">套用預覽</button>
+                        <button onclick="exportAndDownloadHTML()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-violet-600 hover:bg-violet-700 shadow-md flex items-center justify-center space-x-1">
+                            <span>📥 下載新網頁</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REPORT MODAL -->
+        <div id="report-modal" class="hidden fixed inset-0 z-[70] flex items-center justify-center bg-violet-900/60 backdrop-blur-md p-4">
+            <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md h-[80vh] flex flex-col animate-fade-in-up">
+                <div class="p-6 bg-gradient-to-r from-violet-600 to-fuchsia-600 rounded-t-3xl text-white">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-black">My Progress</h3>
+                        <button onclick="closeReport()" class="bg-white/20 hover:bg-white/30 rounded-full p-2 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                        </button>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div><div class="text-violet-200 text-xs font-bold uppercase tracking-wider">Total XP</div><div class="text-3xl font-black" id="report-xp">0</div></div>
+                        <div class="text-right"><div class="text-violet-200 text-xs font-bold uppercase tracking-wider">Level</div><div class="text-3xl font-black text-yellow-300" id="report-level">1</div></div>
+                    </div>
+                </div>
+                <div class="flex-grow overflow-y-auto p-4 space-y-3 bg-slate-50" id="report-list"></div>
+                <div class="p-4 border-t border-slate-200 bg-white rounded-b-3xl">
+                    <button onclick="copyReport()" class="w-full bg-slate-800 text-white py-4 rounded-2xl font-bold flex items-center justify-center space-x-2 hover:bg-slate-900 active:scale-95 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span>Copy Summary</span>
+                    </button>
+                    <p id="copy-feedback" class="text-center text-green-600 text-xs font-bold mt-2 opacity-0 transition-opacity">Copied!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Nav (Practice) -->
+    <div id="bottom-nav-practice" class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-100 p-4 pb-safe shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)] z-40 transition-transform duration-300">
+        <div class="max-w-2xl mx-auto flex justify-between items-center space-x-4">
+            <button id="record-btn-practice" onclick="toggleRecording()" class="w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-105 active:scale-95 bg-gradient-to-br from-indigo-500 to-violet-600 text-white ring-4 ring-indigo-100" style="touch-action: manipulation;">
+                <svg id="mic-icon" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </button>
+            <div class="flex-1 flex space-x-2">
+                <button id="btn-prev" onclick="changeCard(-1)" class="flex-1 flex items-center justify-center space-x-1 px-3 py-4 rounded-2xl font-bold transition-all text-slate-500 bg-slate-100 hover:bg-slate-200 active:scale-95 disabled:opacity-50" disabled="">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <button id="btn-next" onclick="changeCard(1)" class="flex-[2] flex items-center justify-center space-x-2 px-4 py-4 rounded-2xl font-bold transition-all bg-slate-800 text-white shadow-lg active:scale-95 disabled:opacity-50">
+                    <span>Next</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Nav (Game) -->
+    <div id="bottom-nav-game" class="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-slate-100 p-4 pb-safe shadow-[0_-10px_40px_-10px_rgba(0,0,0,0.1)] z-40 translate-y-full transition-transform duration-300">
+        <div class="max-w-2xl mx-auto">
+            <button id="game-action-btn" onclick="startGame()" class="w-full bg-gradient-to-r from-rose-500 to-orange-500 text-white py-4 rounded-2xl font-bold text-xl shadow-lg shadow-rose-200 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center space-x-2">
+                <span>Start Speed Round ⚡</span>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const DEFAULT_VOCAB_DATA = [
+            {
+                "headword": "sensitive",
+                "pos": "Adjective",
+                "definition": "Able to notice very subtle things such as changes or differences that others may not be aware of.",
+                "example": "Kelly is very sensitive to flavors. She can taste any food or drink and name it without seeing it."
+            },
+            {
+                "headword": "keen",
+                "pos": "Adjective",
+                "definition": "Highly advanced, referring to the five senses.",
+                "example": "The owl has such a keen sense of hearing that it can hunt animals in the dark."
+            },
+            {
+                "headword": "keen",
+                "pos": "Adjective",
+                "definition": "Eager or enthusiastic about something.",
+                "example": "Jamie is keen on making his classroom’s Facebook page the most interesting one in the school."
+            },
+            {
+                "headword": "detect",
+                "pos": "Verb",
+                "definition": "To find or be aware of something not easy to notice.",
+                "example": "For most people, it is not easy to detect a small change in temperature."
+            },
+            {
+                "headword": "item",
+                "pos": "Noun",
+                "definition": "A single product or thing.",
+                "example": "More than half of the items in the clothing store were on sale for one day only."
+            },
+            {
+                "headword": "accomplish",
+                "pos": "Verb",
+                "definition": "To complete a difficult task or reach a goal.",
+                "example": "Albert respects those who have accomplished something great in their lives."
+            },
+            {
+                "headword": "accomplishment",
+                "pos": "Noun",
+                "definition": "A success or something great that has been achieved.",
+                "example": "Marc felt that leading his basketball team to the city final was his greatest accomplishment of the year."
+            },
+            {
+                "headword": "disease",
+                "pos": "Noun",
+                "definition": "A human, animal, or plant sickness that is usually caused by an infection.",
+                "example": "Washing your hands often is a good way to stop the spread of disease."
+            },
+            {
+                "headword": "disease",
+                "pos": "Noun",
+                "definition": "A human, animal, or plant sickness that is usually caused by an infection.",
+                "example": "Lynn’s grandmother is suffering from a serious heart disease, so she is staying in a hospital."
+            },
+            {
+                "headword": "infected",
+                "pos": "Adjective",
+                "definition": "Affected by or containing disease-causing bacteria.",
+                "example": "Several passengers were found to have the disease after they took the same flight as an infected person."
+            },
+            {
+                "headword": "infect",
+                "pos": "Verb",
+                "definition": "To pass a disease to a person, animal, or plant.",
+                "example": "More than 70 million people have been infected with AIDS in the last 50 years."
+            },
+            {
+                "headword": "infection",
+                "pos": "Noun",
+                "definition": "A condition in which bacteria or viruses cause sickness.",
+                "example": "The boy developed a serious infection on his leg because he didn't clean the wound after he fell."
+            },
+            {
+                "headword": "infection",
+                "pos": "Noun",
+                "definition": "A condition in which bacteria or viruses cause sickness.",
+                "example": "You shouldn’t rub your eyes because it can cause infection."
+            },
+            {
+                "headword": "locate",
+                "pos": "Verb",
+                "definition": "To find a certain place, or the position of someone or something.",
+                "example": "These days, most taxi drivers use GPS to locate places they don't know how to drive to."
+            },
+            {
+                "headword": "location",
+                "pos": "Noun",
+                "definition": "A place or position.",
+                "example": "This hotel is very expensive because it is in a good location right beside a beach."
+            },
+            {
+                "headword": "reward",
+                "pos": "Noun",
+                "definition": "Something that is given to someone in recognition of a good deed or difficult task he or she has accomplished.",
+                "example": "Janice was given a reward of $2,000 for informing the police of the address of the man they were searching for."
+            },
+            {
+                "headword": "reward",
+                "pos": "Noun",
+                "definition": "Something that is given to someone in recognition of a good deed or difficult task he or she has accomplished.",
+                "example": "Larry feels satisfied when he helps strangers, even if there is no reward."
+            },
+            {
+                "headword": "reward",
+                "pos": "Verb",
+                "definition": "To give someone something because they have done something good or worked hard.",
+                "example": "The teacher rewarded each of the students with a small prize after they all passed the exam."
+            },
+            {
+                "headword": "ability",
+                "pos": "Noun",
+                "definition": "The power to do a certain thing or a special thing that one can do.",
+                "example": "Eagles have the ability to fly without landing for over three hours."
+            },
+            {
+                "headword": "predict",
+                "pos": "Verb",
+                "definition": "To guess that something will happen at a future time.",
+                "example": "The weatherperson predicted that it would start raining around 6:00 p.m., and she was correct."
+            },
+            {
+                "headword": "manage",
+                "pos": "Verb",
+                "definition": "To put great effort into doing something and succeed.",
+                "example": "Kyle managed to lose twenty pounds by exercising every day and eating less junk food."
+            },
+            {
+                "headword": "manage",
+                "pos": "Verb",
+                "definition": "To put great effort into doing something and succeed.",
+                "example": "Joey wasn't sure that he could handle living abroad, but he managed quite well."
+            },
+            {
+                "headword": "manage",
+                "pos": "Verb",
+                "definition": "To handle, control, or use wisely such as money or time.",
+                "example": "Hailey's parents told her that she should manage her money more carefully and stop wasting it."
+            },
+            {
+                "headword": "management",
+                "pos": "Noun",
+                "definition": "The control and organizing of something.",
+                "example": "For busy people like the president of a country, good time management is of great importance."
+            },
+            {
+                "headword": "create",
+                "pos": "Verb",
+                "definition": "To cause something to come to be or to exist.",
+                "example": "The inventor of the telephone, Antonio Meucci, created a new way for humans to communicate."
+            },
+            {
+                "headword": "creation",
+                "pos": "Noun",
+                "definition": "The act of creating something.",
+                "example": "After the creation of the movie theater's website, few people called to find out what movies were playing."
+            },
+            {
+                "headword": "creative",
+                "pos": "Adjective",
+                "definition": "Producing or using original and unusual ideas.",
+                "example": "Nicole always has interesting new ideas, and she shows that in her creative paintings and drawings."
+            },
+            {
+                "headword": "creativity",
+                "pos": "Noun",
+                "definition": "The ability to produce original and unusual ideas.",
+                "example": "The students in the class showed great creativity in the wide range of topics they chose for their articles."
+            },
+            {
+                "headword": "expose",
+                "pos": "Verb",
+                "definition": "To let someone experience something or to introduce something to someone.",
+                "example": "By reading these articles, students will be exposed to different opinions about the topic."
+            },
+            {
+                "headword": "expose",
+                "pos": "Verb",
+                "definition": "To place at risk or without protection from danger or unpleasant things.",
+                "example": "It’s important to wear sunglasses on sunny days because your eyes could be injured if they are exposed for too long."
+            },
+            {
+                "headword": "exposure",
+                "pos": "Noun",
+                "definition": "The state of being exposed to contact with something.",
+                "example": "Too much exposure to the sun and wind caused the paint on the building to come off."
+            },
+            {
+                "headword": "perform",
+                "pos": "Verb",
+                "definition": "To carry out an action, task, or duty.",
+                "example": "After Mrs. Checknita fell ill, her family hired someone to help her perform daily tasks."
+            },
+            {
+                "headword": "perform",
+                "pos": "Verb",
+                "definition": "To entertain people by acting, singing, dancing, or playing music.",
+                "example": "Brad performed a song as a creative way to ask Jennifer to marry him."
+            },
+            {
+                "headword": "perform",
+                "pos": "Verb",
+                "definition": "To entertain people by acting, singing, dancing, or playing music.",
+                "example": "The band has practiced a lot, and this show will be the first time they perform on stage."
+            },
+            {
+                "headword": "performance",
+                "pos": "Noun",
+                "definition": "The action of performing a play, piece of music, or other entertainment.",
+                "example": "The magician will give a performance of his best tricks at the end of the evening show."
+            },
+            {
+                "headword": "behavior",
+                "pos": "Noun",
+                "definition": "The way a person or animal acts.",
+                "example": "Animal behavior can tell us a lot about what a creature is thinking about or wants."
+            },
+            {
+                "headword": "behave",
+                "pos": "Verb",
+                "definition": "To act in a particular way.",
+                "example": "All the guests were impressed by how little Mandy behaved like an adult."
+            },
+            {
+                "headword": "alert",
+                "pos": "Noun",
+                "definition": "A warning that there may be some sort of danger or some special problem.",
+                "example": "Everybody was asked to leave the mall due to a bomb alert in one of the stores."
+            },
+            {
+                "headword": "alert",
+                "pos": "Adjective",
+                "definition": "Quick to see, understand, and act in a particular situation.",
+                "example": "The little beeps that your phone makes help you stay alert to new emails, messages, and posts."
+            },
+            {
+                "headword": "complete",
+                "pos": "Adjective",
+                "definition": "Finished; entirely done.",
+                "example": "The race is not complete until every runner from every team crosses the finish line."
+            },
+            {
+                "headword": "complete",
+                "pos": "Adjective",
+                "definition": "Having all the necessary parts; whole.",
+                "example": "In this English literature course, we will study the complete works of Shakespeare."
+            },
+            {
+                "headword": "complete",
+                "pos": "Verb",
+                "definition": "To finish doing something.",
+                "example": "Kevin is an excellent student. He always completes school projects long before they are due."
+            },
+            {
+                "headword": "assign",
+                "pos": "Verb",
+                "definition": "To give a special task or role to a certain person.",
+                "example": "Craig was assigned the task of giving the new students a tour of the school."
+            },
+            {
+                "headword": "assignment",
+                "pos": "Noun",
+                "definition": "A piece of work given to someone in a course of study or as part of a job.",
+                "example": "The students are going to Tainan on an assignment for history class."
+            },
+            {
+                "headword": "specific",
+                "pos": "Adjective",
+                "definition": "Relating to one certain thing.",
+                "example": "There wasn't any specific reason why Jason didn't attend the performance with his friends. He just didn't feel like it."
+            },
+            {
+                "headword": "due to",
+                "pos": "Phrase",
+                "definition": "Because of.",
+                "example": "The restaurant was not very popular due to the smell of the seafood market nearby."
+            },
+            {
+                "headword": "all of a sudden",
+                "pos": "Phrase",
+                "definition": "Quickly and unexpectedly.",
+                "example": "Cindy was walking down the street when all of a sudden, rain began to pour down from the sky."
+            },
+            {
+                "headword": "turn out",
+                "pos": "Phrase",
+                "definition": "To end in a certain way.",
+                "example": "All the members of the band were worried about their performance, but it turned out to be amazing!"
+            },
+            {
+                "headword": "come across",
+                "pos": "Phrase",
+                "definition": "To find something or someone by chance.",
+                "example": "Paulina went through all of her receipts but didn’t come across any winning numbers."
+            },
+            {
+                "headword": "carry out",
+                "pos": "Phrase",
+                "definition": "To do and complete a task or an assignment.",
+                "example": "After the statue went missing from the square, the police carried out an investigation."
+            }
+        ];
+
+        let currentUnitName = "LT B1 L4";
+        let VOCAB_DATA = [...DEFAULT_VOCAB_DATA];
+
+        let currentIndex = 0;
+        let practiceMode = 'word'; 
+        let activeTab = 'practice'; 
+        let isRecording = false;
+        let recognition = null;
+        let micPermissionBlocked = false;
+        
+        let gameState = 'idle'; 
+        let gameScore = 0;
+        let gameTimerInterval = null;
+        let timeLeft = 60;
+        let gameWordsQueue = [];
+        let activeGameTiles = [];
+        const MAX_ACTIVE_TILES = 6;
+        
+        const TILE_COLORS = [
+            'bg-gradient-to-br from-indigo-500 to-blue-600',
+            'bg-gradient-to-br from-violet-500 to-purple-600',
+            'bg-gradient-to-br from-fuchsia-500 to-pink-600',
+            'bg-gradient-to-br from-rose-500 to-red-600',
+            'bg-gradient-to-br from-amber-400 to-orange-500',
+            'bg-gradient-to-br from-emerald-400 to-teal-500'
+        ];
+
+        let userStats = { xp: 0, level: 1, completedWords: [], completedSentences: [] };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.location.protocol === 'file:') document.getElementById('protocol-warning').classList.remove('hidden');
+            loadCustomVocab();
+            loadStats();
+            const envMsg = envProblem();
+            if (envMsg) showError(envMsg);
+            updateUI();
+            updateStatsUI();
+        });
+
+        function loadCustomVocab() {
+            const savedData = localStorage.getItem('vocabMaster_customList_L4');
+            const savedName = localStorage.getItem('vocabMaster_unitName_L4');
+            if (savedData) {
+                try {
+                    VOCAB_DATA = JSON.parse(savedData);
+                    if (savedName) currentUnitName = savedName;
+                } catch(e) { VOCAB_DATA = [...DEFAULT_VOCAB_DATA]; }
+            }
+            document.getElementById('unit-tag').textContent = currentUnitName;
+        }
+
+        function openSettings() {
+            document.getElementById('settings-modal').classList.remove('hidden');
+            document.getElementById('unit-name-input').value = currentUnitName;
+            document.getElementById('custom-vocab-input').value = VOCAB_DATA.map(i => `${i.headword}\t${i.pos}\t${i.definition}\t${i.example}`).join('\n');
+        }
+
+        function closeSettings() { document.getElementById('settings-modal').classList.add('hidden'); }
+
+        function parseInputData() {
+            const raw = document.getElementById('custom-vocab-input').value.trim();
+            const uName = document.getElementById('unit-name-input').value.trim() || 'Custom Unit';
+            if (!raw) return null;
+
+            const lines = raw.split('\n');
+            const parsed = [];
+            lines.forEach(line => {
+                const parts = line.includes('\t') ? line.split('\t') : line.split(',');
+                if (parts.length >= 2) {
+                    parsed.push({
+                        headword: parts[0].trim(),
+                        pos: parts[1] ? parts[1].trim() : 'Word',
+                        definition: parts[2] ? parts[2].trim() : parts[0].trim(),
+                        example: parts[3] ? parts[3].trim() : parts[0].trim()
+                    });
+                }
+            });
+            return parsed.length > 0 ? { parsed, uName } : null;
+        }
+
+        function saveCustomVocab() {
+            const res = parseInputData();
+            if (!res) return;
+            VOCAB_DATA = res.parsed;
+            currentUnitName = res.uName;
+            localStorage.setItem('vocabMaster_customList_L4', JSON.stringify(VOCAB_DATA));
+            localStorage.setItem('vocabMaster_unitName_L4', currentUnitName);
+            userStats.completedWords = []; userStats.completedSentences = [];
+            saveStats();
+            currentIndex = 0;
+            document.getElementById('unit-tag').textContent = currentUnitName;
+            closeSettings();
+            updateUI();
+            updateStatsUI();
+        }
+
+        function exportAndDownloadHTML() {
+            const res = parseInputData();
+            const dataToExport = res ? res.parsed : VOCAB_DATA;
+            const unitNameToExport = res ? res.uName : currentUnitName;
+
+            let htmlContent = document.documentElement.outerHTML;
+            const replacementString = `const DEFAULT_VOCAB_DATA = ${JSON.stringify(dataToExport, null, 4)};\n        let currentUnitName = "${unitNameToExport}";`;
+            htmlContent = htmlContent.replace(/const DEFAULT_VOCAB_DATA = [\s\S]*?\];\s*let currentUnitName = ".*?";/, replacementString);
+            htmlContent = "<!DOCTYPE html>\n<html lang=\"en\">\n" + htmlContent + "\n</html>";
+
+            const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `index.html`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            closeSettings();
+        }
+
+        function resetDefaultVocab() {
+            if (confirm("Restore the default vocabulary?")) {
+                VOCAB_DATA = [...DEFAULT_VOCAB_DATA];
+                currentUnitName = "LT B1 L4";
+                localStorage.removeItem('vocabMaster_customList_L4');
+                localStorage.removeItem('vocabMaster_unitName_L4');
+                userStats.completedWords = []; userStats.completedSentences = [];
+                saveStats();
+                currentIndex = 0;
+                document.getElementById('unit-tag').textContent = currentUnitName;
+                closeSettings();
+                updateUI();
+                updateStatsUI();
+            }
+        }
+
+        let lastTranscript = '';
+        let resultHandled = false;
+        let manualStop = false;
+        let gameConsumed = {};
+
+        function getSR() { return window.SpeechRecognition || window.webkitSpeechRecognition; }
+
+        function envProblem() {
+            if (location.protocol === 'file:') return '目前是用本機檔案 (file://) 開啟，瀏覽器不允許使用麥克風。請上傳到 HTTPS 網站（例如 GitHub Pages），或用 localhost 開啟。';
+            if (!window.isSecureContext) return '此頁面不是 HTTPS 安全連線，麥克風無法使用。請改用 https:// 開頭的網址。';
+            if (/FBAN|FBAV|Instagram|Line\/|MicroMessenger|; wv\)/i.test(navigator.userAgent)) return '偵測到你在 App 內建瀏覽器（LINE / FB / IG 等）開啟，這類瀏覽器通常不支援語音辨識。請改用 Safari 或 Chrome 開啟。';
+            if (!getSR()) return '此瀏覽器不支援語音辨識，請使用 Chrome、Edge 或 Safari，或改用「手動輸入」。';
+            return null;
+        }
+
+        function stopRecognition() {
+            manualStop = true;
+            const r = recognition;
+            recognition = null;
+            if (r) {
+                r.onstart = r.onend = r.onerror = r.onresult = null;
+                try { r.abort(); } catch (e) {}
+            }
+            isRecording = false;
+            updateRecordingUI();
+        }
+
+        function startRecognition() {
+            const prob = envProblem();
+            if (prob) { micPermissionBlocked = true; showError(prob); return false; }
+
+            stopRecognition();
+            const SR = getSR();
+            const r = new SR();
+            recognition = r;
+            r.continuous = (activeTab === 'game');
+            r.lang = 'en-US';
+            r.interimResults = true;
+            r.maxAlternatives = 1;
+            lastTranscript = ''; resultHandled = false; manualStop = false; gameConsumed = {};
+
+            r.onstart = () => {
+                if (r !== recognition) return;
+                isRecording = true;
+                micPermissionBlocked = false;
+                updateRecordingUI();
+                if (activeTab === 'practice') hideFeedback();
+                hideError();
+            };
+
+            r.onresult = (event) => {
+                if (r !== recognition) return;
+                if (activeTab === 'game' && gameState === 'playing') {
+                    checkGameResults(event);
+                    return;
+                }
+                let transcript = '';
+                for (let i = 0; i < event.results.length; i++) transcript += event.results[i][0].transcript;
+                lastTranscript = transcript;
+                const last = event.results[event.results.length - 1];
+                if (activeTab === 'practice' && last.isFinal && !resultHandled) {
+                    resultHandled = true;
+                    calculateScore(transcript);
+                    try { r.stop(); } catch (e) {}
+                }
+            };
+
+            r.onerror = (event) => {
+                if (r !== recognition) return;
+                console.warn('Speech recognition error:', event.error);
+                if (event.error === 'aborted' || event.error === 'no-speech') return;
+                if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+                    micPermissionBlocked = true;
+                    showError('麥克風被封鎖。請點網址列旁的鎖頭 / 麥克風圖示改為「允許」後按「重新授權」；若頁面是嵌在其他網頁（iframe）中，請直接開啟該網址。');
+                } else if (event.error === 'audio-capture') {
+                    showError('找不到可用的麥克風裝置，請確認麥克風已連接且未被其他程式佔用。');
+                } else if (event.error === 'network') {
+                    showError('語音辨識需要網路連線（瀏覽器會使用雲端語音服務），請確認網路後重試，或改用「手動輸入」。');
+                } else {
+                    showError('語音辨識發生問題 (' + event.error + ')，請重試或點擊「手動輸入」。');
+                }
+                isRecording = false;
+                updateRecordingUI();
+            };
+
+            r.onend = () => {
+                if (r !== recognition) return;
+                isRecording = false;
+                updateRecordingUI();
+                // 練習模式：沒收到 final 結果但有聽到內容 → 仍然計分
+                if (activeTab === 'practice' && !resultHandled && lastTranscript.trim()) {
+                    resultHandled = true;
+                    calculateScore(lastTranscript);
+                }
+                // 遊戲模式：自動重新開始聆聽
+                if (gameState === 'playing' && activeTab === 'game' && !micPermissionBlocked) {
+                    setTimeout(() => { if (gameState === 'playing' && recognition === r) startRecognition(); }, 250);
+                }
+            };
+
+            try {
+        r.start();
+        return true;
+    } catch (e) {
+        console.error(e);
+        showError('無法啟動語音辨識，請重試。');
+        return false;
+    }
+}
+
+// 注意：start() 必須在點擊事件中「同步」呼叫，所以這裡不能有 await
+function toggleRecording() {
+    if (isRecording && recognition) {
+        try { recognition.stop(); } catch (e) {}
+        return;
+    }
+    hideError();
+    micPermissionBlocked = false;
+    startRecognition();
+}
+
+function requestMicPermission() { toggleRecording(); }
+
+function switchTab(tab) {
+            activeTab = tab;
+            stopRecognition();
+            document.getElementById('view-practice').classList.add('hidden');
+            document.getElementById('view-game').classList.add('hidden');
+            document.getElementById(`view-${tab}`).classList.remove('hidden');
+
+            const btnP = document.getElementById('tab-practice');
+            const btnG = document.getElementById('tab-game');
+            if(tab === 'practice') {
+                btnP.className = "flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 bg-white text-violet-700 shadow-sm";
+                btnG.className = "flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 text-violet-100 hover:bg-white/10";
+                document.getElementById('bottom-nav-practice').classList.remove('translate-y-full');
+                document.getElementById('bottom-nav-game').classList.add('translate-y-full');
+                if (gameState === 'playing') stopGame(); 
+            } else {
+                btnG.className = "flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 bg-white text-violet-700 shadow-sm";
+                btnP.className = "flex-1 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center space-x-2 text-violet-100 hover:bg-white/10";
+                document.getElementById('bottom-nav-practice').classList.add('translate-y-full');
+                document.getElementById('bottom-nav-game').classList.remove('translate-y-full');
+            }
+        }
+
+        function startGame() {
+            gameState = 'playing'; gameScore = 0; timeLeft = 60; activeGameTiles = [];
+            gameWordsQueue = [...VOCAB_DATA].sort(() => 0.5 - Math.random());
+            document.getElementById('game-intro').classList.add('hidden');
+            document.getElementById('game-over').classList.add('hidden');
+            document.getElementById('game-board').classList.remove('hidden');
+            document.getElementById('game-board').classList.add('flex');
+            document.getElementById('game-score').textContent = 0;
+            document.getElementById('game-timer').textContent = 60;
+            const btn = document.getElementById('game-action-btn');
+            btn.innerHTML = `<span>Stop Game</span>`;
+            btn.className = "w-full bg-slate-200 text-slate-600 py-4 rounded-2xl font-bold text-xl active:scale-95 transition-all flex items-center justify-center space-x-2";
+            btn.onclick = stopGame;
+            document.getElementById('game-grid').innerHTML = '';
+            fillGrid();
+            if(gameTimerInterval) clearInterval(gameTimerInterval);
+            gameTimerInterval = setInterval(() => { 
+                timeLeft--; 
+                document.getElementById('game-timer').textContent = timeLeft; 
+                if (timeLeft <= 0) stopGame(); 
+            }, 1000);
+            
+            startRecognition();
+        }
+
+        function stopGame() {
+            gameState = 'finished';
+            clearInterval(gameTimerInterval);
+            document.getElementById('game-board').classList.add('hidden');
+            document.getElementById('game-board').classList.remove('flex');
+            document.getElementById('game-over').classList.remove('hidden');
+            document.getElementById('final-score').textContent = gameScore;
+            let gainedXP = gameScore * 5;
+            if (gameScore >= 10) gainedXP += 20;
+            if (gainedXP > 0) { 
+                awardGameXP(gainedXP); 
+                document.getElementById('xp-earned').textContent = `+${gainedXP} XP Earned!`; 
+            } else { 
+                document.getElementById('xp-earned').textContent = `0 XP Earned`; 
+            }
+            const btn = document.getElementById('game-action-btn');
+            btn.innerHTML = `<span>Start Speed Round ⚡</span>`;
+            btn.className = "w-full bg-gradient-to-r from-rose-500 to-orange-500 text-white py-4 rounded-2xl font-bold text-xl shadow-lg shadow-rose-200 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center space-x-2";
+            btn.onclick = startGame;
+            if (recognition) recognition.stop();
+        }
+
+        function fillGrid() {
+            while (activeGameTiles.length < MAX_ACTIVE_TILES && gameWordsQueue.length > 0) addTile();
+            if (activeGameTiles.length < MAX_ACTIVE_TILES && gameWordsQueue.length === 0) { 
+                gameWordsQueue = [...VOCAB_DATA].sort(() => 0.5 - Math.random()); 
+                while (activeGameTiles.length < MAX_ACTIVE_TILES) addTile();
+            }
+        }
+
+        function addTile() {
+            const wordObj = gameWordsQueue.pop();
+            const id = `tile-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+            const colorClass = TILE_COLORS[Math.floor(Math.random() * TILE_COLORS.length)];
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = `${colorClass} aspect-square rounded-2xl shadow-lg p-3 flex flex-col items-center justify-center text-center text-white transform transition-all animate-pop-in relative overflow-hidden`;
+            div.innerHTML = `<div class="absolute inset-0 bg-white/10 opacity-50"></div><div class="relative z-10"><div class="text-[10px] font-bold uppercase opacity-80 mb-1">${wordObj.pos}</div><div class="text-base md:text-lg font-black break-words leading-tight">${wordObj.headword}</div></div>`;
+            document.getElementById('game-grid').appendChild(div);
+            activeGameTiles.push({ id, wordObj, element: div });
+        }
+
+        function checkGameResults(event) {
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const t = event.results[i][0].transcript.toLowerCase();
+                let from = gameConsumed[i] || 0;
+                while (true) {
+                    const part = t.slice(from);
+                    let best = -1, bestPos = -1;
+                    activeGameTiles.forEach((tile, idx) => {
+                        const p = part.indexOf(tile.wordObj.headword.toLowerCase());
+                        if (p !== -1 && (bestPos === -1 || p < bestPos)) { best = idx; bestPos = p; }
+                    });
+                    if (best === -1) break;
+                    from += bestPos + activeGameTiles[best].wordObj.headword.length;
+                    gameConsumed[i] = from;
+                    hitTile(best);
+                }
+            }
+        }
+
+        function hitTile(matchIndex) {
+            const tile = activeGameTiles[matchIndex];
+            gameScore++;
+            document.getElementById('game-score').textContent = gameScore;
+            if (navigator.vibrate) navigator.vibrate(50);
+            tile.element.classList.remove('animate-pop-in');
+            tile.element.classList.add('animate-pop-out');
+            activeGameTiles.splice(matchIndex, 1);
+            setTimeout(() => { tile.element.remove(); fillGrid(); }, 300);
+        }
+
+        function setMode(mode) { practiceMode = mode; hideFeedback(); updateUI(); }
+        function changeCard(direction) {
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < VOCAB_DATA.length) { 
+                currentIndex = newIndex; 
+                hideFeedback(); 
+                updateUI(); 
+            }
+        }
+
+        function speakTarget() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const currentItem = VOCAB_DATA[currentIndex];
+                const text = practiceMode === 'word' ? currentItem.headword : currentItem.example;
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.75; 
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function calculateScore(transcript) {
+            const currentItem = VOCAB_DATA[currentIndex];
+            const target = practiceMode === 'word' ? currentItem.headword : currentItem.example;
+            const cleanTarget = target.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()’']/g,"").trim();
+            const cleanTranscript = transcript.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()’']/g,"").trim();
+            const matchScore = similarity(cleanTarget, cleanTranscript);
+            const percentage = Math.round(matchScore * 100);
+            let xpGained = 0;
+            const alreadyDone = isCompleted(currentIndex, practiceMode);
+            if (percentage >= 70 && !alreadyDone) xpGained = awardXP(percentage);
+            showFeedbackUI(cleanTranscript, percentage, xpGained, alreadyDone);
+        }
+
+        function loadStats() {
+            const saved = localStorage.getItem('vocabMasterStats_L4'); 
+            if (saved) userStats = { ...userStats, ...JSON.parse(saved) };
+        }
+        function saveStats() { localStorage.setItem('vocabMasterStats_L4', JSON.stringify(userStats)); }
+        function resetStats() {
+            if(confirm("Start fresh? This will clear all your levels and XP!")) {
+                userStats = { xp: 0, level: 1, completedWords: [], completedSentences: [] };
+                saveStats(); updateStatsUI(); updateUI();
+            }
+        }
+        
+        function isCompleted(index, mode) { 
+            return (mode === 'word') ? userStats.completedWords.includes(index) : userStats.completedSentences.includes(index); 
+        }
+
+        // 同字/家族自動連動判定機制
+        function awardXP(score) {
+            let xpGain = (practiceMode === 'word') ? ((score>=90)?20:10) : ((score>=90)?40:20);
+            
+            if (practiceMode === 'word') {
+                const currentWord = VOCAB_DATA[currentIndex].headword.toLowerCase().trim();
+                VOCAB_DATA.forEach((item, idx) => {
+                    if (item.headword.toLowerCase().trim() === currentWord) {
+                        if (!userStats.completedWords.includes(idx)) {
+                            userStats.completedWords.push(idx);
+                        }
+                    }
+                });
+            } else {
+                userStats.completedSentences.push(currentIndex);
+            }
+            
+            processXP(xpGain);
+            return xpGain;
+        }
+
+        function awardGameXP(amount) { processXP(amount); }
+        function processXP(amount) {
+            userStats.xp += amount;
+            const nextLevelThreshold = userStats.level * 150; 
+            if (userStats.xp >= nextLevelThreshold) { userStats.level++; showLevelUpModal(); }
+            saveStats(); updateStatsUI(); updateUI(); 
+        }
+
+        function updateStatsUI() {
+            const uniqueCompletedWords = new Set(userStats.completedWords.map(i => VOCAB_DATA[i]?.headword.toLowerCase().trim())).size;
+            const uniqueTotalWords = new Set(VOCAB_DATA.map(i => i.headword.toLowerCase().trim())).size;
+            
+            document.getElementById('word-count').textContent = `${uniqueCompletedWords}/${uniqueTotalWords}`;
+            document.getElementById('sentence-count').textContent = userStats.completedSentences.length;
+            document.getElementById('xp-display').textContent = userStats.xp;
+            document.getElementById('level-display').textContent = userStats.level;
+            document.getElementById('level-badge').textContent = userStats.level;
+            const currentThreshold = (userStats.level - 1) * 150;
+            const nextThreshold = userStats.level * 150;
+            let progress = userStats.level === 1 ? (userStats.xp / 150) * 100 : ((userStats.xp - currentThreshold) / (nextThreshold - currentThreshold)) * 100;
+            document.getElementById('xp-bar').style.width = `${Math.min(Math.max(progress, 0), 100)}%`;
+        }
+
+        function updateUI() {
+            if (!VOCAB_DATA || VOCAB_DATA.length === 0) return;
+            const item = VOCAB_DATA[currentIndex];
+            document.getElementById('word-pos').textContent = item.pos;
+            document.getElementById('word-headword').textContent = item.headword;
+            document.getElementById('word-definition').textContent = `"${item.definition}"`;
+            document.getElementById('progress-indicator').textContent = `Card ${currentIndex + 1} / ${VOCAB_DATA.length}`;
+            
+            const targetText = practiceMode === 'word' ? item.headword : item.example;
+            document.getElementById('target-text').textContent = targetText;
+            document.getElementById('target-label').textContent = practiceMode === 'word' ? "Target Word" : "Target Sentence";
+
+            const btnWord = document.getElementById('btn-mode-word');
+            const btnSentence = document.getElementById('btn-mode-sentence');
+            if (practiceMode === 'word') {
+                btnWord.className = "flex-1 py-3 rounded-xl text-sm font-bold transition-all shadow-md bg-white text-fuchsia-600 ring-2 ring-fuchsia-100 scale-105";
+                btnSentence.className = "flex-1 py-3 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-slate-600";
+            } else {
+                btnSentence.className = "flex-1 py-3 rounded-xl text-sm font-bold transition-all shadow-md bg-white text-fuchsia-600 ring-2 ring-fuchsia-100 scale-105";
+                btnWord.className = "flex-1 py-3 rounded-xl text-sm font-bold transition-all text-slate-400 hover:text-slate-600";
+            }
+
+            const badge = document.getElementById('completed-badge');
+            if (isCompleted(currentIndex, practiceMode)) badge.classList.remove('hidden');
+            else badge.classList.add('hidden');
+
+            document.getElementById('btn-prev').disabled = (currentIndex === 0);
+            document.getElementById('btn-next').disabled = (currentIndex === VOCAB_DATA.length - 1);
+        }
+
+        function updateRecordingUI() {
+            const btn = document.getElementById('record-btn-practice');
+            if (isRecording && activeTab === 'practice') {
+                btn.className = "w-16 h-16 rounded-full flex items-center justify-center shadow-xl shadow-rose-400 transition-all transform scale-110 bg-rose-500 text-white ring-4 ring-rose-200 animate-pulse";
+            } else {
+                btn.className = "w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition-all transform hover:scale-105 active:scale-95 bg-gradient-to-br from-indigo-500 to-violet-600 text-white ring-4 ring-indigo-100";
+            }
+        }
+
+        function showFeedbackUI(spokenText, score, xpGained, alreadyDone) {
+            const container = document.getElementById('feedback-container');
+            container.classList.remove('hidden');
+            document.getElementById('spoken-text').textContent = `"${spokenText}"`;
+            document.getElementById('score-badge').textContent = `${score}%`;
+            const msgEl = document.getElementById('feedback-message');
+            const badge = document.getElementById('score-badge');
+            if (score >= 70) {
+                badge.className = "w-14 h-14 rounded-2xl rotate-3 flex items-center justify-center text-xl font-black shadow-sm transition-colors bg-green-100 text-green-600";
+                msgEl.textContent = "Great job!";
+                if(xpGained > 0) showXPFloat(xpGained);
+            } else {
+                badge.className = "w-14 h-14 rounded-2xl rotate-3 flex items-center justify-center text-xl font-black shadow-sm transition-colors bg-rose-100 text-rose-500";
+                msgEl.textContent = "Try again!";
+            }
+        }
+        function hideFeedback() { document.getElementById('feedback-container').classList.add('hidden'); }
+        function showXPFloat(amount, isText) {
+            const container = document.getElementById('xp-float-container');
+            const floatEl = document.createElement('div');
+            floatEl.className = "text-yellow-400 font-black text-4xl animate-float-up drop-shadow-md z-50 whitespace-nowrap";
+            floatEl.textContent = isText ? amount : `+${amount} XP`;
+            container.appendChild(floatEl);
+            setTimeout(() => floatEl.remove(), 1500);
+        }
+        function showLevelUpModal() { showXPFloat('Level Up! 🎉 Lv.' + userStats.level, true); }
+        function showError(msg) { document.getElementById('error-banner').classList.remove('hidden'); document.getElementById('error-text').textContent = msg; }
+        function hideError() { document.getElementById('error-banner').classList.add('hidden'); }
+
+        function openReport() {
+            document.getElementById('report-modal').classList.remove('hidden');
+            document.getElementById('report-xp').textContent = userStats.xp;
+            document.getElementById('report-level').textContent = userStats.level;
+            
+            const uniqueCompletedWords = new Set(userStats.completedWords.map(i => VOCAB_DATA[i]?.headword.toLowerCase().trim())).size;
+            const uniqueTotalWords = new Set(VOCAB_DATA.map(i => i.headword.toLowerCase().trim())).size;
+            const masteredS = userStats.completedSentences.length;
+            const total = VOCAB_DATA.length;
+            
+            let html = `
+                <div class="bg-indigo-50 p-4 rounded-2xl mb-4 border border-indigo-100 grid grid-cols-2 gap-4">
+                    <div class="bg-white p-3 rounded-xl text-center shadow-sm">
+                        <div class="text-2xl font-black text-slate-800">${uniqueCompletedWords}<span class="text-slate-400 text-sm">/${uniqueTotalWords}</span></div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Words</div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl text-center shadow-sm">
+                        <div class="text-2xl font-black text-slate-800">${masteredS}<span class="text-slate-400 text-sm">/${total}</span></div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Sentences</div>
+                    </div>
+                </div>`;
+            
+            VOCAB_DATA.forEach((item, index) => {
+                const w = userStats.completedWords.includes(index);
+                const s = userStats.completedSentences.includes(index);
+                html += `<div class="bg-white p-3 rounded-2xl flex items-center justify-between shadow-sm border border-slate-100">
+                    <div class="font-bold text-slate-800 capitalize">${item.headword} <span class="text-xs font-normal text-slate-400">(${item.pos})</span></div>
+                    <div class="flex space-x-2"> 
+                         <div class="flex flex-col items-center"><span class="text-[10px] uppercase font-bold text-slate-400">Word</span>${w ? '✅' : '⬜'}</div> 
+                         <div class="flex flex-col items-center"><span class="text-[10px] uppercase font-bold text-slate-400">Sent</span>${s ? '✅' : '⬜'}</div>
+                    </div></div>`;
+            });
+            document.getElementById('report-list').innerHTML = html;
+        }
+        function closeReport() { document.getElementById('report-modal').classList.add('hidden'); }
+        function copyReport() {
+            const uniqueCompletedWords = new Set(userStats.completedWords.map(i => VOCAB_DATA[i]?.headword.toLowerCase().trim())).size;
+            let text = `🏆 VocabMaster [${currentUnitName}] Level ${userStats.level} (${userStats.xp} XP)\nMastered: ${uniqueCompletedWords} Unique Words, ${userStats.completedSentences.length} Sentences.`;
+            navigator.clipboard.writeText(text).then(() => {
+                document.getElementById('copy-feedback').classList.remove('opacity-0');
+                setTimeout(() => document.getElementById('copy-feedback').classList.add('opacity-0'), 2000);
+            });
+        }
+
+        function similarity(s1, s2) {
+            let longer = s1, shorter = s2;
+            if (s1.length < s2.length) { longer = s2; shorter = s1; }
+            if (longer.length === 0) return 1.0;
+            return (longer.length - editDistance(longer, shorter)) / parseFloat(longer.length);
+        }
+        function editDistance(s1, s2) {
+            s1 = s1.toLowerCase(); s2 = s2.toLowerCase();
+            const costs = [];
+            for (let i = 0; i <= s1.length; i++) {
+                let lastValue = i;
+                for (let j = 0; j <= s2.length; j++) {
+                    if (i === 0) costs[j] = j;
+                    else if (j > 0) {
+                        let newValue = costs[j - 1];
+                        if (s1.charAt(i - 1) !== s2.charAt(j - 1)) newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+                        costs[j - 1] = lastValue;
+                        lastValue = newValue;
+                    }
+                }
+                if (i > 0) costs[s2.length] = lastValue;
+            }
+            return costs[s2.length];
+        }
+    </script>
+</body>
+</html>
